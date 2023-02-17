@@ -20,29 +20,27 @@
   </style>
 </head>
 <body>
-  <canvas width="1000" height="500" style="width: 1000px; height: 500px;" id="c"></canvas>
+  <canvas width="1000" height="500" style="width: 1000px; height: 500px; background-color: floralwhite;" id="canvas"></canvas>
   <script id="vertex-shader-2d" type="x-shader/x-vertex">
-// an attribute will receive data from a buffer
-attribute vec4 a_position;
+    attribute vec2 a_position;
 
-// all shaders have a main function
-void main() {
+    varying vec4 v_color;
+   
+    void main() {
+   
+      gl_Position = vec4(a_position, 0, 1);
 
-  // gl_Position is a special variable a vertex shader
-  // is responsible for setting
-  gl_Position = a_position;
-}
+      v_color = gl_Position * 1.0 + 0.5;
+    }
   </script>
   <script id="fragment-shader-2d" type="x-shader/x-fragment">
-// fragment shaders don't have a default precision so we need
-// to pick one. mediump is a good default
-precision mediump float;
+    precision mediump float;
 
-void main() {
-  // gl_FragColor is a special variable a fragment shader
-  // is responsible for setting
-  gl_FragColor = vec4(1, 0, 0.5, 1); // return reddish-purple
-}
+    varying vec4 v_color;
+    
+    void main() {
+      gl_FragColor = v_color;
+    }
   </script>
   <script src="js/liquorice.js"></script>
 </body>
