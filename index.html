@@ -4,9 +4,46 @@
   <title>hi</title>
   <link rel="shortcut icon" href="img/favicon_light.ico" type="image/x-icon" media="(prefers-color-scheme: light)">
   <link rel="shortcut icon" href="img/favicon_dark.ico" type="image/x-icon" media="(prefers-color-scheme: dark)">
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin:0; padding:0;
+      height:100vh; width: 100vw;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    canvas {
+      max-height: 100vh; max-width: 100vw;
+      /* image-rendering: pixelated; */
+    }
+  </style>
 </head>
 <body>
+  <canvas width="1000" height="500" style="width: 1000px; height: 500px;" id="c"></canvas>
+  <script id="vertex-shader-2d" type="x-shader/x-vertex">
+// an attribute will receive data from a buffer
+attribute vec4 a_position;
+
+// all shaders have a main function
+void main() {
+
+  // gl_Position is a special variable a vertex shader
+  // is responsible for setting
+  gl_Position = a_position;
+}
+  </script>
+  <script id="fragment-shader-2d" type="x-shader/x-fragment">
+// fragment shaders don't have a default precision so we need
+// to pick one. mediump is a good default
+precision mediump float;
+
+void main() {
+  // gl_FragColor is a special variable a fragment shader
+  // is responsible for setting
+  gl_FragColor = vec4(1, 0, 0.5, 1); // return reddish-purple
+}
+  </script>
   <script src="js/liquorice.js"></script>
 </body>
 </html>
